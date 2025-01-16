@@ -2,7 +2,6 @@ import { Grid } from "@mantine/core";
 import ArticleCard from "../../../common/components/ThemeCard/ThemeCard";
 
 import pubMedData from "../data/pubmed_detail.json";
-import pubMedFullData from "../data/pubmed_full.json";
 
 const PubMedView = (props) => {
   const { filter, limit } = props;
@@ -27,12 +26,6 @@ const PubMedView = (props) => {
     });
   };
 
-  // const getFullArticle = (id) => {
-  //   return pubMedFullData.PubmedArticleSet.PubmedArticle.map(
-  //     (article) => article.MedlineCitation.PMID["#text"] == id
-  //   );
-  // };
-
   return filteredArticles().length === 0 ? (
     <p>No articles found.</p>
   ) : (
@@ -41,14 +34,13 @@ const PubMedView = (props) => {
         <Grid.Col key={article.uid} span={{ base: 12, xs: 4 }}>
           <ArticleCard
             title={article.title}
-            link={`https://pubmed.ncbi.nlm.nih.gov/${article.uid}`}
+            link={`https://pubmed.ncbi.nlm.nih.gov/${article.uniqueId}`}
             authors={article.authors.map((author) => author.name).join(", ")}
             source={article.source}
             volume={article.volume}
             issue={article.issue}
             pages={article.pages}
             pubdate={article.pubdate}
-            tags={[]}
           />
         </Grid.Col>
       ))}

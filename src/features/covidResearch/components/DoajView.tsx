@@ -13,7 +13,6 @@ const DoajView = (props) => {
 
   // Extract useful information to display
   const articles = doajData.results.map((article) => article.bibjson);
-  console.log(doajData.results);
   const filteredArticles = () => {
     return articles.filter((article, index) => {
       const limitSetting = limit || articles.length + 1;
