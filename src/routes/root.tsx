@@ -27,6 +27,17 @@ export default function Root() {
   const [pageSizeSelectOpened, setPageSizeSelectOpened] = useState(false);
   const [pageSizeSelected, setPageSizeSelected] = useState(pageSizeSelect[0]);
 
+  /* Sort Filter */
+  const sortBySelect = [
+    { label: "Random Order", value: "random" },
+    { label: "Newest", value: "newest_first" },
+    { label: "Oldest", value: "oldest_first" },
+    { label: "Title A-Z", value: "title_az" },
+    { label: "Title Z-A", value: "title_za" },
+  ];
+  const [sortBySelectOpened, setSortBySelectOpened] = useState(false);
+  const [sortBySelected, setSortBySelected] = useState(sortBySelect[0]);
+
   const handleChangeArticleSource = (checkedStatus: boolean, value: string) => {
     if (checkedStatus && !filterSources.find((source) => source == value)) {
       setFilterSources([...filterSources, value]);
@@ -58,14 +69,23 @@ export default function Root() {
         <main>
           <Group justify="space-between">
             <h2>Articles</h2>
-            {/* @TODO: add sort by random/date/title */}
-            <CustomSelectMenu
-              data={pageSizeSelect}
-              selected={pageSizeSelected}
-              opened={pageSizeSelectOpened}
-              setOpened={setPageSizeSelectOpened}
-              setSelected={setPageSizeSelected}
-            />
+            <Group align="right">
+              {/* @TODO: add sort by random/date/title */}
+              <CustomSelectMenu
+                data={sortBySelect}
+                selected={sortBySelected}
+                opened={sortBySelectOpened}
+                setOpened={setSortBySelectOpened}
+                setSelected={setSortBySelected}
+              />
+              <CustomSelectMenu
+                data={pageSizeSelect}
+                selected={pageSizeSelected}
+                opened={pageSizeSelectOpened}
+                setOpened={setPageSizeSelectOpened}
+                setSelected={setPageSizeSelected}
+              />
+            </Group>
           </Group>
           <Paper withBorder radius="md" p="md" mb="20">
             <Group justify="left">
