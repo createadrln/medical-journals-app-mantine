@@ -56,25 +56,27 @@ export default function Root() {
       <Header />
       <Container size="lg" my="md">
         <main>
-          <h2>Articles</h2>
+          <Group justify="space-between">
+            <h2>Articles</h2>
+            {/* @TODO: add sort by random/date/title */}
+            <CustomSelectMenu
+              data={pageSizeSelect}
+              selected={pageSizeSelected}
+              opened={pageSizeSelectOpened}
+              setOpened={setPageSizeSelectOpened}
+              setSelected={setPageSizeSelected}
+            />
+          </Group>
           <Paper withBorder radius="md" p="md" mb="20">
             <Group justify="left">
-              {/* @TODO: add sort by random/date/title */}
               <input
                 type="text"
                 placeholder="Filter articles by title"
                 value={filterTitle}
                 onChange={(e) => setFilterTitle(e.target.value)}
-                style={{ padding: "5px", width: "300px" }}
+                style={{ padding: "5px", width: "500px", marginRight: "20px" }}
               />
               {getSourceCheckboxes()}
-              <CustomSelectMenu
-                data={pageSizeSelect}
-                selected={pageSizeSelected}
-                opened={pageSizeSelectOpened}
-                setOpened={setPageSizeSelectOpened}
-                setSelected={setPageSizeSelected}
-              />
             </Group>
           </Paper>
           <AllCovidSourcesView

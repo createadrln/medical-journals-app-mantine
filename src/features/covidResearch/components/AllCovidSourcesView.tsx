@@ -6,8 +6,9 @@ import Pagination from "../../../common/components/Pagination/pagination";
 
 const AllCovidSourcesView = ({ selectedSources, pageSizeSelected }) => {
   const [articles, setArticles] = useState<Articles>();
-  const handleUpdateArticles = (page = 1, pageSize = 12, sources = "all") => {
-    const url = `http://localhost:3000/journals?page=${page}&pageSize=${pageSize}&sources=${sources}`;
+
+  const handleUpdateArticles = (pageSizeSelected) => {
+    const url = `http://localhost:3000/journals?page=${1}&pageSize=${pageSizeSelected}`;
 
     fetch(url)
       .then((response) => {
@@ -21,25 +22,23 @@ const AllCovidSourcesView = ({ selectedSources, pageSizeSelected }) => {
   };
 
   useEffect(() => {
-    handleUpdateArticles(
-      articles!.page || 1,
-      pageSizeSelected.value,
-      selectedSources
-    );
-  }, [pageSizeSelected, articles, selectedSources]);
+    handleUpdateArticles(pageSizeSelected.value);
+  }, [pageSizeSelected, selectedSources]);
 
-  // console.log(selectedSources);
+  if (!articles) {
+    return <p>Something went wrong...</p>;
+  }
 
-  if (!articles!.data) {
+  if (!articles.data) {
     return <p>No journal data available...</p>;
   }
 
-  return articles!.data.length === 0 ? (
+  return articles.data.length === 0 ? (
     <p>No articles found.</p>
   ) : (
     <Group>
       <Grid>
-        {articles!.data.map((article: Article) => (
+        {articles.data.map((article: Article) => (
           <Grid.Col key={article.id} span={{ base: 12, xs: 4 }}>
             <ArticleCard
               id={article.id}

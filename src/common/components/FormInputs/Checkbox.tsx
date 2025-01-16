@@ -23,7 +23,6 @@ const ThemeCheckbox = ({
       onChange={() => handleOnChange(value)}
       tabIndex={-1}
       size="md"
-      mr="xl"
       styles={{ input: { cursor: "pointer" } }}
       aria-hidden
     />
