@@ -1,5 +1,6 @@
 import { Group, Menu, UnstyledButton } from "@mantine/core";
 import { IconChevronDown } from "@tabler/icons-react";
+import { Select } from "../../../classes/inputs";
 
 import classes from "./SelectMenu.module.css";
 
@@ -10,7 +11,7 @@ const ThemeSelectMenu = ({
   opened,
   selected,
 }) => {
-  const items = data.map((item: object) => (
+  const items = data.map((item: Select) => (
     <Menu.Item onClick={() => setSelected(item)} key={item.label}>
       {item.label}
     </Menu.Item>
