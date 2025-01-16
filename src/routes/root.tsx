@@ -5,7 +5,7 @@ import { theme } from "../theme";
 import Header from "../common/components/Header/Header";
 import Footer from "../common/components/Footer/Footer";
 import ThemeCheckbox from "../common/components/FormInputs/Checkbox";
-import CustomSelectMenu from "../common/components/FormInputs/SelectMenu";
+import ThemeSelectMenu from "../common/components/FormInputs/SelectMenu";
 import AllCovidSourcesView from "../features/covidResearch/components/AllCovidSourcesView";
 
 import "@mantine/core/styles.css";
@@ -70,15 +70,14 @@ export default function Root() {
           <Group justify="space-between">
             <h2>Articles</h2>
             <Group align="right">
-              {/* @TODO: add sort by random/date/title */}
-              <CustomSelectMenu
+              <ThemeSelectMenu
                 data={sortBySelect}
                 selected={sortBySelected}
                 opened={sortBySelectOpened}
                 setOpened={setSortBySelectOpened}
                 setSelected={setSortBySelected}
               />
-              <CustomSelectMenu
+              <ThemeSelectMenu
                 data={pageSizeSelect}
                 selected={pageSizeSelected}
                 opened={pageSizeSelectOpened}
