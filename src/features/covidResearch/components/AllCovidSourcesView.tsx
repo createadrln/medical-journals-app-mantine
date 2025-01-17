@@ -1,12 +1,18 @@
 import { useState, useEffect } from "react";
 import { Grid, Group } from "@mantine/core";
-import { Articles, Article } from "../../../classes/articles";
+
+import { Article } from "../../../classes/articles";
 import ArticleCard from "../../../common/components/ThemeCard/ThemeCard";
 import Pagination from "../../../common/components/Pagination/pagination";
+
 import { handleFetchArticles } from "../../../data/data";
 
-const AllCovidSourcesView = ({ selectedSources, pageSizeSelected }) => {
-  const [articles, setArticles] = useState<Articles>();
+const AllCovidSourcesView = ({
+  selectedSources,
+  pageSizeSelected,
+  articles,
+  setArticles,
+}) => {
   const [page, setPage] = useState<string>("1");
 
   useEffect(() => {
@@ -14,9 +20,10 @@ const AllCovidSourcesView = ({ selectedSources, pageSizeSelected }) => {
       page,
       pageSizeSelected.value,
       selectedSources,
+      "",
       setArticles
     );
-  }, [page, pageSizeSelected, selectedSources]);
+  }, [page, pageSizeSelected, selectedSources, setArticles]);
 
   if (!articles) {
     return <p>Something went wrong...</p>;

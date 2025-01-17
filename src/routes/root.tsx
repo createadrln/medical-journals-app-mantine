@@ -1,6 +1,13 @@
 import { useState } from "react";
-import { MantineProvider, Container, Paper, Group } from "@mantine/core";
+import {
+  MantineProvider,
+  Container,
+  Paper,
+  Group,
+  Button,
+} from "@mantine/core";
 import { theme } from "../theme";
+import "@mantine/core/styles.css";
 
 import Header from "../common/components/Header/Header";
 import Footer from "../common/components/Footer/Footer";
@@ -8,9 +15,12 @@ import ThemeCheckbox from "../common/components/FormInputs/Checkbox";
 import ThemeSelectMenu from "../common/components/FormInputs/SelectMenu";
 import AllCovidSourcesView from "../features/covidResearch/components/AllCovidSourcesView";
 
-import "@mantine/core/styles.css";
+import { Articles } from "../classes/articles";
+import { handleFetchArticles } from "../data/data";
 
 export default function Root() {
+  const [articles, setArticles] = useState<Articles>();
+
   /* Source Filter */
   const articleSources = ["PubMed", "Doaj"];
   const [filterSources, setFilterSources] = useState(articleSources);
@@ -20,9 +30,9 @@ export default function Root() {
 
   /* Page Filter */
   const pageSizeSelect = [
-    { label: "Show 6", value: 6 },
-    { label: "Show 18", value: 18 },
-    { label: "Show 36", value: 36 },
+    { label: "Show 12", value: "12" },
+    { label: "Show 24", value: "24" },
+    { label: "Show 60", value: "60" },
   ];
   const [pageSizeSelectOpened, setPageSizeSelectOpened] = useState(false);
   const [pageSizeSelected, setPageSizeSelected] = useState(pageSizeSelect[0]);
@@ -87,20 +97,38 @@ export default function Root() {
             </Group>
           </Group>
           <Paper withBorder radius="md" p="md" mb="20">
-            <Group justify="left">
-              <input
-                type="text"
-                placeholder="Filter articles by title"
-                value={filterTitle}
-                onChange={(e) => setFilterTitle(e.target.value)}
-                style={{ padding: "5px", width: "500px", marginRight: "20px" }}
-              />
-              {getSourceCheckboxes()}
+            <Group justify="space-between">
+              <Group gap="xs">
+                <input
+                  type="text"
+                  placeholder="Filter articles by title"
+                  value={filterTitle}
+                  onChange={(e) => setFilterTitle(e.target.value)}
+                  style={{ padding: "5px", width: "500px" }}
+                />
+                <Button
+                  className="mantine-focus-auto"
+                  onClick={() =>
+                    handleFetchArticles(
+                      "1",
+                      pageSizeSelected.value,
+                      filterSources,
+                      filterTitle,
+                      setArticles
+                    )
+                  }
+                >
+                  Search
+                </Button>
+              </Group>
+              <Group justify="right">{getSourceCheckboxes()}</Group>
             </Group>
           </Paper>
           <AllCovidSourcesView
             selectedSources={filterSources}
             pageSizeSelected={pageSizeSelected}
+            articles={articles}
+            setArticles={setArticles}
           />
         </main>
       </Container>
