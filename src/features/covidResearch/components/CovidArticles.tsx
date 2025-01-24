@@ -1,14 +1,18 @@
 import { useState, useEffect } from "react";
-import { Grid, Group } from "@mantine/core";
+import { Grid } from "@mantine/core";
 
 import { Article } from "../../../classes/articles";
 import ArticleCard from "../../../common/components/ThemeCard/ThemeCard";
 import Pagination from "../../../common/components/Pagination/pagination";
 
-import { handleFetchArticles } from "../../../data/data";
+import CovidKeywords from "./CovidKeywords";
 
-const AllCovidSourcesView = ({
+import { fetchArticles } from "../../../data/data";
+import { formatTimestamp } from "../../../utils/dateUtils";
+
+const CovidArticles = ({
   selectedSources,
+  filterTitle,
   pageSizeSelected,
   articles,
   setArticles,
@@ -16,14 +20,21 @@ const AllCovidSourcesView = ({
   const [page, setPage] = useState<string>("1");
 
   useEffect(() => {
-    handleFetchArticles(
-      page,
-      pageSizeSelected.value,
-      selectedSources,
-      "",
-      setArticles
-    );
-  }, [page, pageSizeSelected, selectedSources, setArticles]);
+    const handleFetchArticles = async () => {
+      const articles = await fetchArticles(
+        page,
+        pageSizeSelected.value,
+        selectedSources,
+        filterTitle
+      );
+      if (articles) {
+        setArticles(articles);
+      } else {
+        console.error("Failed to fetch articles.");
+      }
+    };
+    handleFetchArticles();
+  }, [page, pageSizeSelected, filterTitle, selectedSources, setArticles]);
 
   if (!articles) {
     return <p>Something went wrong...</p>;
@@ -36,7 +47,7 @@ const AllCovidSourcesView = ({
   return articles.data.length === 0 ? (
     <p>No articles found.</p>
   ) : (
-    <Group>
+    <>
       <Grid>
         {articles.data.map((article: Article) => (
           <Grid.Col key={article.id} span={{ base: 12, xs: 4 }}>
@@ -46,7 +57,7 @@ const AllCovidSourcesView = ({
               links={article.link}
               authors={article.authors}
               source={article.source}
-              pubdate={article.pub_timestamp}
+              pubdate={formatTimestamp(parseFloat(article.pub_timestamp))}
             />
           </Grid.Col>
         ))}
@@ -56,8 +67,9 @@ const AllCovidSourcesView = ({
         totalPages={articles!.totalCount}
         onPageChange={setPage}
       />
-    </Group>
+      <CovidKeywords />
+    </>
   );
 };
 
-export default AllCovidSourcesView;
+export default CovidArticles;
