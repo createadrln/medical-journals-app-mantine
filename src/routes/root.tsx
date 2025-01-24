@@ -13,10 +13,10 @@ import Header from "../common/components/Header/Header";
 import Footer from "../common/components/Footer/Footer";
 import ThemeCheckbox from "../common/components/FormInputs/Checkbox";
 import ThemeSelectMenu from "../common/components/FormInputs/SelectMenu";
-import AllCovidSourcesView from "../features/covidResearch/components/AllCovidSourcesView";
+import CovidArticles from "../features/covidResearch/components/CovidArticles";
 
 import { Articles } from "../classes/articles";
-import { handleFetchArticles } from "../data/data";
+// import { fetchArticles } from "../data/data";
 
 export default function Root() {
   const [articles, setArticles] = useState<Articles>();
@@ -106,7 +106,7 @@ export default function Root() {
                   onChange={(e) => setFilterTitle(e.target.value)}
                   style={{ padding: "5px", width: "500px" }}
                 />
-                <Button
+                {/* <Button
                   className="mantine-focus-auto"
                   onClick={() =>
                     handleFetchArticles(
@@ -119,13 +119,20 @@ export default function Root() {
                   }
                 >
                   Search
+                </Button> */}
+                <Button
+                  className="mantine-focus-auto"
+                  onClick={() => setFilterTitle("")}
+                >
+                  Clear
                 </Button>
               </Group>
               <Group justify="right">{getSourceCheckboxes()}</Group>
             </Group>
           </Paper>
-          <AllCovidSourcesView
+          <CovidArticles
             selectedSources={filterSources}
+            filterTitle={filterTitle}
             pageSizeSelected={pageSizeSelected}
             articles={articles}
             setArticles={setArticles}

@@ -1,11 +1,8 @@
-import { Articles } from "../classes/articles";
-
-export const handleFetchArticles = (
+export const fetchArticles = async (
   page: string = "1",
   pageSize: string = "12",
   sources: string[],
-  title: string = '',
-  setData
+  title: string = ""
 ) => {
   const url = new URL("http://localhost:3000/journals");
   url.searchParams.append("page", page);
@@ -19,13 +16,29 @@ export const handleFetchArticles = (
     url.searchParams.append("title", title);
   }
 
-  fetch(url)
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! Status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then((data: Articles) => setData(data))
-    .catch((error) => console.error("Error fetching articles:", error));
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching articles:", error);
+  }
+};
+
+export const fetchKeywords = async () => {
+  const url = new URL("http://localhost:3000/keywords");
+
+  try {
+    const response = await fetch(url);
+    if (!response.ok) {
+      throw new Error(`Response status: ${response.status}`);
+    }
+    const data = await response.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching articles:", error);
+  }
 };
