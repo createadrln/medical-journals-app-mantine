@@ -19,7 +19,7 @@ type Author = {
   name: string;
 };
 
-export type Keywords = {
+export type Keyword = {
   id: number;
   keyword: string;
   article_id: string;
