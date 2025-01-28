@@ -11,6 +11,7 @@ import "@mantine/core/styles.css";
 
 import Header from "../common/components/Header/Header";
 import Footer from "../common/components/Footer/Footer";
+import { HeroText } from "../common/components/Hero/HeroText";
 import ThemeCheckbox from "../common/components/FormInputs/Checkbox";
 import ThemeSelectMenu from "../common/components/FormInputs/SelectMenu";
 import CovidArticles from "../features/covidResearch/components/CovidArticles";
@@ -75,26 +76,24 @@ export default function Root() {
   return (
     <MantineProvider theme={theme}>
       <Header />
-      <Container size="lg" my="md">
+      <HeroText />
+      <Container size="lg">
         <main>
-          <Group justify="space-between">
-            <h2>Articles</h2>
-            <Group align="right">
-              <ThemeSelectMenu
-                data={sortBySelect}
-                selected={sortBySelected}
-                opened={sortBySelectOpened}
-                setOpened={setSortBySelectOpened}
-                setSelected={setSortBySelected}
-              />
-              <ThemeSelectMenu
-                data={pageSizeSelect}
-                selected={pageSizeSelected}
-                opened={pageSizeSelectOpened}
-                setOpened={setPageSizeSelectOpened}
-                setSelected={setPageSizeSelected}
-              />
-            </Group>
+          <Group justify="right" mb="20">
+            <ThemeSelectMenu
+              data={sortBySelect}
+              selected={sortBySelected}
+              opened={sortBySelectOpened}
+              setOpened={setSortBySelectOpened}
+              setSelected={setSortBySelected}
+            />
+            <ThemeSelectMenu
+              data={pageSizeSelect}
+              selected={pageSizeSelected}
+              opened={pageSizeSelectOpened}
+              setOpened={setPageSizeSelectOpened}
+              setSelected={setPageSizeSelected}
+            />
           </Group>
           <Paper withBorder radius="md" p="md" mb="20">
             <Group justify="space-between">
