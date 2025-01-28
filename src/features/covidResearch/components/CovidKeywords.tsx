@@ -12,7 +12,7 @@ const CovidKeywords = () => {
     if (keywords) {
       setAllKeywords(keywords);
     } else {
-      console.error("Failed to fetch articles.");
+      console.error("Failed to fetch keywords.");
     }
   };
 
