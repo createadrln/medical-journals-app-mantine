@@ -1,12 +1,13 @@
 export const fetchArticles = async (
-  page: string = "1",
-  pageSize: string = "12",
+  page: number = 1,
+  pageSize: number = 12,
   sources: string[],
+  sort: {value: string, label: string},
   title: string = ""
 ) => {
   const url = new URL("http://localhost:3000/journals");
-  url.searchParams.append("page", page);
-  url.searchParams.append("pageSize", pageSize);
+  url.searchParams.append("page", page.toString());
+  url.searchParams.append("pageSize", pageSize.toString());
 
   if (sources.length > 0) {
     url.searchParams.append("source", JSON.stringify(sources));
@@ -14,6 +15,11 @@ export const fetchArticles = async (
 
   if (title) {
     url.searchParams.append("title", title);
+  }
+
+  if (sort) {
+    url.searchParams.append("sort", sort.value.split(",")[0]);
+    url.searchParams.append("order", sort.value.split(",")[1]);
   }
 
   try {

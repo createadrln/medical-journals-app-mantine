@@ -40,11 +40,10 @@ export default function Root() {
 
   /* Sort Filter */
   const sortBySelect = [
-    { label: "Random Order", value: "random" },
-    { label: "Newest", value: "newest_first" },
-    { label: "Oldest", value: "oldest_first" },
-    { label: "Title A-Z", value: "title_az" },
-    { label: "Title Z-A", value: "title_za" },
+    { label: "Newest", value: "pub_date,DESC" },
+    { label: "Oldest", value: "pub_date,ASC" },
+    { label: "Title A-Z", value: "title,ASC" },
+    { label: "Title Z-A", value: "title,DESC" },
   ];
   const [sortBySelectOpened, setSortBySelectOpened] = useState(false);
   const [sortBySelected, setSortBySelected] = useState(sortBySelect[0]);
@@ -131,6 +130,7 @@ export default function Root() {
           </Paper>
           <CovidArticles
             selectedSources={filterSources}
+            selectedSort={sortBySelected}
             filterTitle={filterTitle}
             pageSizeSelected={pageSizeSelected}
             articles={articles}
