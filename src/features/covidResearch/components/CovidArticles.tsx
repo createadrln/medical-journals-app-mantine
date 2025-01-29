@@ -1,9 +1,8 @@
 import { useState, useEffect } from "react";
-import { Grid } from "@mantine/core";
+import { Grid, Pagination } from "@mantine/core";
 
 import { Article } from "../../../classes/articles";
 import ArticleCard from "../../../common/components/ThemeCard/ThemeCard";
-import Pagination from "../../../common/components/Pagination/pagination";
 
 import CovidKeywords from "./CovidKeywords";
 
@@ -12,12 +11,13 @@ import { formatTimestamp } from "../../../utils/dateUtils";
 
 const CovidArticles = ({
   selectedSources,
+  selectedSort,
   filterTitle,
   pageSizeSelected,
   articles,
   setArticles,
 }) => {
-  const [page, setPage] = useState<string>("1");
+  const [page, setPage] = useState<number>(1);
 
   useEffect(() => {
     const handleFetchArticles = async () => {
@@ -25,6 +25,7 @@ const CovidArticles = ({
         page,
         pageSizeSelected.value,
         selectedSources,
+        selectedSort,
         filterTitle
       );
       if (articles) {
@@ -34,7 +35,14 @@ const CovidArticles = ({
       }
     };
     handleFetchArticles();
-  }, [page, pageSizeSelected, filterTitle, selectedSources, setArticles]);
+  }, [
+    page,
+    pageSizeSelected,
+    filterTitle,
+    selectedSources,
+    selectedSort,
+    setArticles,
+  ]);
 
   if (!articles) {
     return <p>Something went wrong...</p>;
@@ -63,9 +71,10 @@ const CovidArticles = ({
         ))}
       </Grid>
       <Pagination
-        currentPage={articles!.page}
-        totalPages={articles!.totalCount}
-        onPageChange={setPage}
+        mt="20"
+        total={articles!.totalCount}
+        value={articles!.page}
+        onChange={setPage}
       />
       <CovidKeywords />
     </>
