@@ -14,7 +14,7 @@ export function HeroText() {
         <Title className={classes.title}>
           Search
           <Text component="span" className={classes.highlight} inherit>
-            16891
+            {' '}16891{' '}
           </Text>
           articles, data, and keywords.
         </Title>
