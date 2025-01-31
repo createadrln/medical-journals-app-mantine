@@ -5,6 +5,7 @@ import {
   Paper,
   Group,
   Button,
+  Select,
 } from "@mantine/core";
 import { theme } from "../theme";
 import "@mantine/core/styles.css";
@@ -13,11 +14,9 @@ import Header from "../common/components/Header/Header";
 import Footer from "../common/components/Footer/Footer";
 import { HeroText } from "../common/components/Hero/HeroText";
 import ThemeCheckbox from "../common/components/FormInputs/Checkbox";
-import ThemeSelectMenu from "../common/components/FormInputs/SelectMenu";
 import CovidArticles from "../features/covidResearch/components/CovidArticles";
 
 import { Articles } from "../classes/articles";
-// import { fetchArticles } from "../data/data";
 
 export default function Root() {
   const [articles, setArticles] = useState<Articles>();
@@ -35,7 +34,6 @@ export default function Root() {
     { label: "Show 24", value: "24" },
     { label: "Show 60", value: "60" },
   ];
-  const [pageSizeSelectOpened, setPageSizeSelectOpened] = useState(false);
   const [pageSizeSelected, setPageSizeSelected] = useState(pageSizeSelect[0]);
 
   /* Sort Filter */
@@ -45,8 +43,10 @@ export default function Root() {
     { label: "Title A-Z", value: "title,ASC" },
     { label: "Title Z-A", value: "title,DESC" },
   ];
-  const [sortBySelectOpened, setSortBySelectOpened] = useState(false);
-  const [sortBySelected, setSortBySelected] = useState(sortBySelect[0]);
+  const [sortBySelected, setSortBySelected] = useState<{
+    label: string;
+    value: string;
+  }>(sortBySelect[0]);
 
   const handleChangeArticleSource = (checkedStatus: boolean, value: string) => {
     if (checkedStatus && !filterSources.find((source) => source == value)) {
@@ -79,19 +79,27 @@ export default function Root() {
       <Container size="lg">
         <main>
           <Group justify="right" mb="20">
-            <ThemeSelectMenu
+            <Select
+              placeholder={sortBySelected.label}
               data={sortBySelect}
-              selected={sortBySelected}
-              opened={sortBySelectOpened}
-              setOpened={setSortBySelectOpened}
-              setSelected={setSortBySelected}
+              onChange={(selection: string) =>
+                setSortBySelected(
+                  sortBySelect.find(
+                    (sortByValue: object) => sortByValue.value === selection
+                  )
+                )
+              }
             />
-            <ThemeSelectMenu
+            <Select
+              placeholder={pageSizeSelected.label}
               data={pageSizeSelect}
-              selected={pageSizeSelected}
-              opened={pageSizeSelectOpened}
-              setOpened={setPageSizeSelectOpened}
-              setSelected={setPageSizeSelected}
+              onChange={(selection: string) =>
+                setPageSizeSelected(
+                  pageSizeSelect.find(
+                    (pageSizeValue: object) => pageSizeValue.value === selection
+                  )
+                )
+              }
             />
           </Group>
           <Paper withBorder radius="md" p="md" mb="20">
@@ -104,20 +112,6 @@ export default function Root() {
                   onChange={(e) => setFilterTitle(e.target.value)}
                   style={{ padding: "5px", width: "500px" }}
                 />
-                {/* <Button
-                  className="mantine-focus-auto"
-                  onClick={() =>
-                    handleFetchArticles(
-                      "1",
-                      pageSizeSelected.value,
-                      filterSources,
-                      filterTitle,
-                      setArticles
-                    )
-                  }
-                >
-                  Search
-                </Button> */}
                 <Button
                   className="mantine-focus-auto"
                   onClick={() => setFilterTitle("")}

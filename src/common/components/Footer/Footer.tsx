@@ -1,5 +1,4 @@
-import { Text, Container, ActionIcon, Group, rem } from "@mantine/core";
-// import { IconBrandTwitter, IconBrandYoutube, IconBrandInstagram } from '@tabler/icons-react';
+import { Text, Container } from "@mantine/core";
 import CovidStatsGroup from "../../../features/covidStats/CovidStats";
 import classes from "./FooterLinks.module.css";
 
