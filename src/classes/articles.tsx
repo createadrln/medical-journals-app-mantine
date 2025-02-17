@@ -20,7 +20,6 @@ type Author = {
 };
 
 export type Keyword = {
-  id: number;
   keyword: string;
-  article_id: string;
+  count: number;
 };

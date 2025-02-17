@@ -72,6 +72,7 @@ const CovidArticles = ({
       </Grid>
       <Pagination
         mt="20"
+        mb="40"
         total={articles!.totalCount}
         value={articles!.page}
         onChange={setPage}

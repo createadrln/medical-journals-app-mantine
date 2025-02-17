@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Group } from "@mantine/core";
+import { Group, Button } from "@mantine/core";
 
 import { Keyword } from "../../../classes/articles";
 import { fetchKeywords } from "../../../data/data";
@@ -22,11 +22,20 @@ const CovidKeywords = () => {
 
   return (
     <>
-      <h2>Keywords</h2>
-      <Group>
-        {allKeywords.map((keywordItem: Keyword) => {
-          return <span key={keywordItem.id}>{keywordItem.keyword}</span>;
+      <h2>Common Keywords</h2>
+      <Group mb="40">
+        {allKeywords.map((keywordItem: Keyword, index) => {
+          return (
+            keywordItem.count > 2 && (
+              <Button key={index} variant="default">
+                {keywordItem.keyword.charAt(0).toUpperCase() +
+                  keywordItem.keyword.slice(1)}{" "}
+                ({keywordItem.count})
+              </Button>
+            )
+          );
         })}
+        <Button size="lg" mt="20">View All Keywords</Button>
       </Group>
     </>
   );

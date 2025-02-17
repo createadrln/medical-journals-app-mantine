@@ -2,7 +2,7 @@ import { Container, Text, Title } from "@mantine/core";
 import { Dots } from "./Dots";
 import classes from "./HeroText.module.css";
 
-export function HeroText() {
+export function HeroText({ articleCount }) {
   return (
     <Container className={classes.wrapper} size={1400}>
       <Dots className={classes.dots} style={{ left: 0, top: 0 }} />
@@ -14,9 +14,10 @@ export function HeroText() {
         <Title className={classes.title}>
           Search
           <Text component="span" className={classes.highlight} inherit>
-            {' '}16891{' '}
+            {" "}
+            {articleCount}{" "}
           </Text>
-          articles, data, and keywords.
+          <u>articles</u>, <u>data</u>, and <u>keywords</u>.
         </Title>
         <Container p={0} size={600}>
           <Text size="lg" c="dimmed" className={classes.description}>

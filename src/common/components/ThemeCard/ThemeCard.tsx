@@ -1,4 +1,4 @@
-import { Card, Text } from "@mantine/core";
+import { Card, Text, Button, Flex } from "@mantine/core";
 import classes from "./ThemeCard.module.css";
 
 const ArticleCard = (props) => {
@@ -19,13 +19,20 @@ const ArticleCard = (props) => {
       <Text className={classes.title} fw={500} component="a">
         {title}
       </Text>
-      <Text mt="5">
-        {linksList.map((link: string, index) => (
-          <a key={`card-link-${id}-${index}`} href={link.slice(1).slice(0, -1)}>
-            {link.slice(1).slice(0, -1)}
-          </a>
+      <Flex>
+        {linksList.map((link: string, index: number) => (
+          <Button
+            justify="left"
+            size="sm"
+            key={`card-link-${id}-${index}`}
+            component="a"
+            href={link}
+            mt="20"
+          >
+            View Article on {source}
+          </Button>
         ))}
-      </Text>
+      </Flex>
     </Card>
   );
 };

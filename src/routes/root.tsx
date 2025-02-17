@@ -22,7 +22,7 @@ export default function Root() {
   const [articles, setArticles] = useState<Articles>();
 
   /* Source Filter */
-  const articleSources = ["PubMed", "Doaj"];
+  const articleSources = ["PubMed", "Doaj", "Europe PNC"];
   const [filterSources, setFilterSources] = useState(articleSources);
 
   /* Title Filter */
@@ -75,20 +75,26 @@ export default function Root() {
   return (
     <MantineProvider theme={theme}>
       <Header />
-      <HeroText />
+      <HeroText
+        articleCount={`${
+          articles?.totalCount
+            ? articles?.totalCount * articles?.pageSize
+            : "N/A"
+        }`}
+      />
       <Container size="lg">
         <main>
           <Group justify="right" mb="20">
             <Select
               placeholder={sortBySelected.label}
               data={sortBySelect}
-              onChange={(selection: string) =>
-                setSortBySelected(
-                  sortBySelect.find(
-                    (sortByValue: object) => sortByValue.value === selection
-                  )
-                )
-              }
+              onChange={(selection: string) => {
+                const sortBySelectValue = sortBySelect.find(
+                  (sortByValue: object) => sortByValue.value === selection
+                );
+                sortBySelectValue && setSortBySelected(sortBySelectValue);
+                return;
+              }}
             />
             <Select
               placeholder={pageSizeSelected.label}

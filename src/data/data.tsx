@@ -34,8 +34,12 @@ export const fetchArticles = async (
   }
 };
 
-export const fetchKeywords = async () => {
+export const fetchKeywords = async (order_by_count = 'true') => {
   const url = new URL("http://localhost:3000/keywords");
+
+  if (order_by_count) {
+    url.searchParams.append("order_by_count", order_by_count);
+  }
 
   try {
     const response = await fetch(url);
