@@ -18,6 +18,8 @@ import CovidArticles from "../features/covidResearch/components/CovidArticles";
 
 import { Articles } from "../classes/articles";
 
+import { SelectItem } from "../classes/inputs";
+
 export default function Root() {
   const [articles, setArticles] = useState<Articles>();
 
@@ -34,7 +36,9 @@ export default function Root() {
     { label: "Show 24", value: "24" },
     { label: "Show 60", value: "60" },
   ];
-  const [pageSizeSelected, setPageSizeSelected] = useState(pageSizeSelect[0]);
+  const [pageSizeSelected, setPageSizeSelected] = useState<SelectItem>(
+    pageSizeSelect[0]
+  );
 
   /* Sort Filter */
   const sortBySelect = [
@@ -43,10 +47,9 @@ export default function Root() {
     { label: "Title A-Z", value: "title,ASC" },
     { label: "Title Z-A", value: "title,DESC" },
   ];
-  const [sortBySelected, setSortBySelected] = useState<{
-    label: string;
-    value: string;
-  }>(sortBySelect[0]);
+  const [sortBySelected, setSortBySelected] = useState<SelectItem>(
+    sortBySelect[0]
+  );
 
   const handleChangeArticleSource = (checkedStatus: boolean, value: string) => {
     if (checkedStatus && !filterSources.find((source) => source == value)) {
@@ -84,7 +87,7 @@ export default function Root() {
               data={sortBySelect}
               onChange={(selection: string) => {
                 const sortBySelectValue = sortBySelect.find(
-                  (sortByValue: object) => sortByValue.value === selection
+                  (sortByValue: SelectItem) => sortByValue.value === selection
                 );
                 sortBySelectValue && setSortBySelected(sortBySelectValue);
                 return;
@@ -93,13 +96,13 @@ export default function Root() {
             <Select
               placeholder={pageSizeSelected.label}
               data={pageSizeSelect}
-              onChange={(selection: string) =>
-                setPageSizeSelected(
-                  pageSizeSelect.find(
-                    (pageSizeValue: object) => pageSizeValue.value === selection
-                  )
-                )
-              }
+              onChange={(selection: string) => {
+                const pageSizeSelectValue = pageSizeSelect.find(
+                  (pageSizeValue: SelectItem) => pageSizeValue.value === selection
+                );
+                pageSizeSelectValue && setPageSizeSelected(pageSizeSelectValue);
+                return;
+              }}
             />
           </Group>
           <Paper withBorder radius="md" p="md" mb="20">

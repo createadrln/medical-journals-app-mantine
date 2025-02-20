@@ -83,7 +83,7 @@ const CovidArticles = ({
         value={articles!.page}
         onChange={setPage}
       />
-      <Container>
+      <Container px="40" size="lg">
         <CovidKeywords setKeywordFilter={setKeywordFilter} />
       </Container>
     </>

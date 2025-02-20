@@ -19,7 +19,7 @@ const ArticleCard = (props) => {
       <Text className={classes.title} fw={500} component="a">
         {title}
       </Text>
-      <Flex>
+      <Flex wrap="nowrap">
         {linksList.map((link: string, index: number) => (
           <Button
             justify="left"
