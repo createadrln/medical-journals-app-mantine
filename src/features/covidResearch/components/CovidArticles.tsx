@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { Grid, Pagination } from "@mantine/core";
+import { Grid, Pagination, Container } from "@mantine/core";
 
 import { Article } from "../../../classes/articles";
 import ArticleCard from "../../../common/components/ThemeCard/ThemeCard";
@@ -19,14 +19,19 @@ const CovidArticles = ({
 }) => {
   const [page, setPage] = useState<number>(1);
 
+  /* Keyword Filter */
+  const [keywordFilter, setKeywordFilter] = useState("");
+
   useEffect(() => {
+    console.log(keywordFilter);
     const handleFetchArticles = async () => {
       const articles = await fetchArticles(
         page,
         pageSizeSelected.value,
         selectedSources,
         selectedSort,
-        filterTitle
+        filterTitle,
+        keywordFilter
       );
       if (articles) {
         setArticles(articles);
@@ -39,6 +44,7 @@ const CovidArticles = ({
     page,
     pageSizeSelected,
     filterTitle,
+    keywordFilter,
     selectedSources,
     selectedSort,
     setArticles,
@@ -77,7 +83,9 @@ const CovidArticles = ({
         value={articles!.page}
         onChange={setPage}
       />
-      <CovidKeywords />
+      <Container>
+        <CovidKeywords setKeywordFilter={setKeywordFilter} />
+      </Container>
     </>
   );
 };

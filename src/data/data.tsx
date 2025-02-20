@@ -3,7 +3,8 @@ export const fetchArticles = async (
   pageSize: number = 12,
   sources: string[],
   sort: {value: string, label: string},
-  title: string = ""
+  title: string = "",
+  keyword: string = ""
 ) => {
   const url = new URL("http://localhost:3000/journals");
   url.searchParams.append("page", page.toString());
@@ -15,6 +16,10 @@ export const fetchArticles = async (
 
   if (title) {
     url.searchParams.append("title", title);
+  }
+
+  if (keyword) {
+    url.searchParams.append("keyword", keyword);
   }
 
   if (sort) {

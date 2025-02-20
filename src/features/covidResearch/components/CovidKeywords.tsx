@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Keyword } from "../../../classes/articles";
 import { fetchKeywords } from "../../../data/data";
 
-const CovidKeywords = () => {
+const CovidKeywords = ({ setKeywordFilter }) => {
   const [allKeywords, setAllKeywords] = useState<Keyword[]>([]);
 
   const handleFetchKeywords = async () => {
@@ -24,11 +24,15 @@ const CovidKeywords = () => {
   return (
     <>
       <h2>Common Keywords</h2>
-      <Group mb="40">
+      <Group mb="20">
         {allKeywords.map((keywordItem: Keyword, index) => {
           return (
             keywordItem.count > 2 && (
-              <Button key={index} variant="default">
+              <Button
+                key={index}
+                variant="default"
+                onClick={() => setKeywordFilter(keywordItem.keyword)}
+              >
                 {keywordItem.keyword.charAt(0).toUpperCase() +
                   keywordItem.keyword.slice(1)}{" "}
                 ({keywordItem.count})
@@ -36,10 +40,10 @@ const CovidKeywords = () => {
             )
           );
         })}
-        <Button component={Link} to="/all-keywords" size="lg" mt="20">
-          View All Keywords
-        </Button>
       </Group>
+      <Button component={Link} to="/all-keywords" size="lg" mb="40">
+        View All Keywords
+      </Button>
     </>
   );
 };

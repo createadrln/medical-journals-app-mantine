@@ -21,6 +21,7 @@ export default function HeaderSimple() {
       component={Link}
       to={link.link}
       ml="20"
+      key={link.label}
     >
       {link.label}
     </Anchor>
