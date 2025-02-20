@@ -1,33 +1,37 @@
-import { useState } from "react";
-import { Burger, Container, Group, Button, NavLink } from "@mantine/core";
+import {
+  Burger,
+  Container,
+  Group,
+  Anchor,
+} from "@mantine/core";
 import { Link } from "react-router-dom";
 import { useDisclosure } from "@mantine/hooks";
 import classes from "./HeaderSimple.module.css";
 
-const links = [{ link: "/about", label: "About" }];
+const links = [
+  { link: "/", label: "Home" },
+  { link: "/about", label: "About" },
+];
 
 export default function HeaderSimple() {
   const [opened, { toggle }] = useDisclosure(false);
-  const [active, setActive] = useState(links[0].link);
 
   const items = links.map((link) => (
-    <NavLink
+    <Anchor
       component={Link}
       to={link.link}
-      label={link.label}
-      variant="default"
-      active={active === link.link || undefined}
-      onClick={(event) => {
-        event.preventDefault();
-        setActive(link.link);
-      }}
-    />
+      ml="20"
+    >
+      {link.label}
+    </Anchor>
   ));
 
   return (
     <header className={classes.header}>
       <Container size="lg" className={classes.inner}>
-        <h1>COVID Research</h1>
+        <Anchor c="black" component={Link} to="/" underline="never">
+          <h1>COVID Research</h1>
+        </Anchor>
         <Group gap={5} visibleFrom="xs">
           {items}
         </Group>

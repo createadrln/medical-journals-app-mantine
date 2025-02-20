@@ -23,3 +23,5 @@ export type Keyword = {
   keyword: string;
   count: number;
 };
+
+export type Keywords = Keyword[]

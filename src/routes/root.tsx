@@ -75,13 +75,7 @@ export default function Root() {
   return (
     <MantineProvider theme={theme}>
       <Header />
-      <HeroText
-        articleCount={`${
-          articles?.totalCount
-            ? articles?.totalCount * articles?.pageSize
-            : "N/A"
-        }`}
-      />
+      <HeroText articleCount={`${articles?.totalCount || "N/A"}`} />
       <Container size="lg">
         <main>
           <Group justify="right" mb="20">

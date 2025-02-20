@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { Group, Button } from "@mantine/core";
+import { Link } from "react-router-dom";
 
 import { Keyword } from "../../../classes/articles";
 import { fetchKeywords } from "../../../data/data";
@@ -35,7 +36,9 @@ const CovidKeywords = () => {
             )
           );
         })}
-        <Button size="lg" mt="20">View All Keywords</Button>
+        <Button component={Link} to="/all-keywords" size="lg" mt="20">
+          View All Keywords
+        </Button>
       </Group>
     </>
   );

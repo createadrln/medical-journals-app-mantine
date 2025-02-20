@@ -73,7 +73,7 @@ const CovidArticles = ({
       <Pagination
         mt="20"
         mb="40"
-        total={articles!.totalCount}
+        total={articles!.totalPages}
         value={articles!.page}
         onChange={setPage}
       />
