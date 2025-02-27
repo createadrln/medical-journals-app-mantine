@@ -1,5 +1,4 @@
 import { Text, Container } from "@mantine/core";
-import CovidStatsGroup from "../../../features/covidStats/CovidStats";
 import { EmailBanner } from "../EmailBanner/EmailBanner";
 import classes from "./FooterLinks.module.css";
 

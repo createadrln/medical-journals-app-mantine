@@ -85,6 +85,8 @@ export default function Root() {
             <Select
               placeholder={sortBySelected.label}
               data={sortBySelect}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-expect-error
               onChange={(selection: string) => {
                 const sortBySelectValue = sortBySelect.find(
                   (sortByValue: SelectItem) => sortByValue.value === selection
@@ -96,6 +98,8 @@ export default function Root() {
             <Select
               placeholder={pageSizeSelected.label}
               data={pageSizeSelect}
+              // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+              // @ts-expect-error
               onChange={(selection: string) => {
                 const pageSizeSelectValue = pageSizeSelect.find(
                   (pageSizeValue: SelectItem) => pageSizeValue.value === selection
