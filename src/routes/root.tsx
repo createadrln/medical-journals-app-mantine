@@ -24,7 +24,7 @@ export default function Root() {
   const [articles, setArticles] = useState<Articles>();
 
   /* Source Filter */
-  const articleSources = ["PubMed", "Doaj", "Europe PNC"];
+  const articleSources = ["PubMed", "Doaj", "Europe PMC"];
   const [filterSources, setFilterSources] = useState(articleSources);
 
   /* Title Filter */

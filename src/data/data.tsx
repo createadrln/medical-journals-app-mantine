@@ -2,7 +2,7 @@ export const fetchArticles = async (
   page: number = 1,
   pageSize: number = 12,
   sources: string[],
-  sort: {value: string, label: string},
+  sort: { value: string; label: string },
   title: string = "",
   keyword: string = ""
 ) => {
@@ -39,7 +39,7 @@ export const fetchArticles = async (
   }
 };
 
-export const fetchKeywords = async (order_by_count = 'true') => {
+export const fetchKeywords = async (order_by_count = "true") => {
   const url = new URL("http://localhost:3000/keywords");
 
   if (order_by_count) {
