@@ -1,3 +1,5 @@
+const API_URL = "/api";
+
 export const fetchArticles = async (
   page: number = 1,
   pageSize: number = 12,
@@ -6,7 +8,7 @@ export const fetchArticles = async (
   title: string = "",
   keyword: string = ""
 ) => {
-  const url = new URL("http://localhost:3000/journals");
+  const url = new URL(`${API_URL}/journals`);
   url.searchParams.append("page", page.toString());
   url.searchParams.append("pageSize", pageSize.toString());
 
@@ -40,7 +42,7 @@ export const fetchArticles = async (
 };
 
 export const fetchKeywords = async (order_by_count = "true") => {
-  const url = new URL("http://localhost:3000/keywords");
+  const url = new URL(`${API_URL}/keywords`);
 
   if (order_by_count) {
     url.searchParams.append("order_by_count", order_by_count);
