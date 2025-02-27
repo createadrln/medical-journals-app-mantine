@@ -1,6 +1,11 @@
 # Use an official Node.js image as the base
 FROM node:22.13.1 AS build
 
+ARG NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
+
+COPY cert/zscaler.crt /usr/local/share/ca-certificates/
+RUN cat /usr/local/share/ca-certificates/zscaler.crt >>/etc/ssl/certs/ca-certificates.crt
+
 # Set working directory inside the container
 WORKDIR /app
 
