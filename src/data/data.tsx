@@ -1,4 +1,4 @@
-const API_URL = "/api";
+const API_URL = "http://localhost:3000";
 
 export const fetchArticles = async (
   page: number = 1,
