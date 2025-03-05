@@ -1,4 +1,4 @@
-const API_URL = "http://localhost:3000";
+const API_URL = import.meta.env.VITE_BACKEND_HOST_URL;
 
 export const fetchArticles = async (
   page: number = 1,

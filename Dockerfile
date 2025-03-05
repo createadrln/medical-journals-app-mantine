@@ -1,10 +1,8 @@
 # Use an official Node.js image as the base
 FROM node:22.13.1 AS build
 
-ARG NODE_EXTRA_CA_CERTS=/etc/ssl/certs/ca-certificates.crt
-
-COPY cert/zscaler.crt /usr/local/share/ca-certificates/
-RUN cat /usr/local/share/ca-certificates/zscaler.crt >>/etc/ssl/certs/ca-certificates.crt
+ARG VITE_BACKEND_HOST_URL
+ENV VITE_BACKEND_HOST_URL=$VITE_BACKEND_HOST_URL
 
 # Set working directory inside the container
 WORKDIR /app
