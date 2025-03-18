@@ -19,8 +19,6 @@ import CovidArticles from "../features/covidResearch/components/CovidArticles";
 import { Articles } from "../classes/articles";
 import { SelectItem } from "../classes/inputs";
 
-import classes from './root.module.css';
-
 export default function Root() {
   const [articles, setArticles] = useState<Articles>();
 
@@ -80,7 +78,7 @@ export default function Root() {
     <MantineProvider theme={theme}>
       <Header />
       <HeroText articleCount={`${articles?.totalCount || "N/A"}`} />
-      <Container size="lg" className={classes.filters_container}>
+      <Container size="lg">
         <main>
           <Group justify="right" mb="20">
             <Select

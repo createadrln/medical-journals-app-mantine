@@ -1,15 +1,9 @@
 import { Container, Text, Title } from "@mantine/core";
-import { Dots } from "./Dots";
 import classes from "./HeroText.module.css";
 
 export function HeroText({ articleCount }) {
   return (
     <Container className={classes.wrapper} size={1400}>
-      <Dots className={classes.dots} style={{ left: 0, top: 0 }} />
-      <Dots className={classes.dots} style={{ left: 60, top: 0 }} />
-      <Dots className={classes.dots} style={{ left: 0, top: 140 }} />
-      <Dots className={classes.dots} style={{ right: 0, top: 60 }} />
-
       <div className={classes.inner}>
         <Title className={classes.title}>
           Search
