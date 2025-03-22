@@ -31,7 +31,7 @@ export default function HeaderSimple() {
     <header className={classes.header}>
       <Container size="lg" className={classes.inner}>
         <Anchor c="black" component={Link} to="/" underline="never">
-          <h1>COVID Research</h1>
+          <h1>COVID Connect</h1>
         </Anchor>
         <Group gap={5} visibleFrom="xs">
           {items}
