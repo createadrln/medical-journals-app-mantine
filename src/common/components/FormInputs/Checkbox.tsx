@@ -22,7 +22,9 @@ const ThemeCheckbox = ({
       checked={checkedvalue}
       onChange={() => handleOnChange(value)}
       tabIndex={-1}
-      size="md"
+      pt="5"
+      pb="5"
+      size="sm"
       styles={{ input: { cursor: "pointer" } }}
       aria-hidden
     />

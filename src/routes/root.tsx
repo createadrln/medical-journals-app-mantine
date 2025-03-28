@@ -6,6 +6,7 @@ import {
   Group,
   Button,
   Select,
+  Menu,
 } from "@mantine/core";
 import { theme } from "../theme";
 import "@mantine/core/styles.css";
@@ -23,7 +24,7 @@ export default function Root() {
   const [articles, setArticles] = useState<Articles>();
 
   /* Source Filter */
-  const articleSources = ["PubMed", "Doaj", "Europe PMC"];
+  const articleSources = ["PubMed", "Doaj", "Europe PMC", "Springer"];
   const [filterSources, setFilterSources] = useState(articleSources);
 
   /* Title Filter */
@@ -101,7 +102,8 @@ export default function Root() {
               // @ts-expect-error
               onChange={(selection: string) => {
                 const pageSizeSelectValue = pageSizeSelect.find(
-                  (pageSizeValue: SelectItem) => pageSizeValue.value === selection
+                  (pageSizeValue: SelectItem) =>
+                    pageSizeValue.value === selection
                 );
                 pageSizeSelectValue && setPageSizeSelected(pageSizeSelectValue);
                 return;
@@ -125,7 +127,14 @@ export default function Root() {
                   Clear
                 </Button>
               </Group>
-              <Group justify="right">{getSourceCheckboxes()}</Group>
+              <Group justify="right">
+                <Menu>
+                  <Menu.Target>
+                    <Button variant="outline">Filter Sources</Button>
+                  </Menu.Target>
+                  <Menu.Dropdown w={200} p="20">{getSourceCheckboxes()}</Menu.Dropdown>
+                </Menu>
+              </Group>
             </Group>
           </Paper>
           <CovidArticles
