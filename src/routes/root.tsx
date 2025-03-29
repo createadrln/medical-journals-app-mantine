@@ -8,6 +8,7 @@ import {
   Select,
   Menu,
 } from "@mantine/core";
+import { SlArrowDown } from "react-icons/sl";
 import { theme } from "../theme";
 import "@mantine/core/styles.css";
 
@@ -130,9 +131,13 @@ export default function Root() {
               <Group justify="right">
                 <Menu>
                   <Menu.Target>
-                    <Button variant="outline">Filter Sources</Button>
+                    <Button rightSection={<SlArrowDown />} variant="outline">
+                      Filter Sources
+                    </Button>
                   </Menu.Target>
-                  <Menu.Dropdown w={200} p="20">{getSourceCheckboxes()}</Menu.Dropdown>
+                  <Menu.Dropdown w={200} p="20">
+                    {getSourceCheckboxes()}
+                  </Menu.Dropdown>
                 </Menu>
               </Group>
             </Group>
