@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import Root from "./routes/root";
 import ErrorPage from "./features/pages/ErrorPage";
 import AllKeywords from "./routes/all_keywords";
+import About from "./routes/about";
 
 const router = createBrowserRouter([
   {
@@ -14,6 +15,11 @@ const router = createBrowserRouter([
   {
     path: "/all-keywords",
     element: <AllKeywords />,
+    errorElement: <ErrorPage />,
+  },
+  {
+    path: "/about",
+    element: <About />,
     errorElement: <ErrorPage />,
   }
 ]);
