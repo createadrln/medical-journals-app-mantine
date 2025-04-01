@@ -11,6 +11,7 @@ import {
 import { SlArrowDown } from "react-icons/sl";
 import { theme } from "../theme";
 import "@mantine/core/styles.css";
+import classes from "../styles/core.module.css";
 
 import Header from "../common/components/Header/Header";
 import Footer from "../common/components/Footer/Footer";
@@ -111,7 +112,13 @@ export default function Root() {
               }}
             />
           </Group>
-          <Paper withBorder radius="md" p="md" mb="20">
+          <Paper
+            withBorder
+            className={classes.paperWrapper}
+            radius="md"
+            p="md"
+            mb="20"
+          >
             <Group justify="space-between">
               <Group gap="xs">
                 <input

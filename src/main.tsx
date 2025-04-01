@@ -5,6 +5,7 @@ import Root from "./routes/root";
 import ErrorPage from "./features/pages/ErrorPage";
 import AllKeywords from "./routes/all_keywords";
 import About from "./routes/about";
+import Changelog from "./routes/changlog";
 
 const router = createBrowserRouter([
   {
@@ -21,7 +22,12 @@ const router = createBrowserRouter([
     path: "/about",
     element: <About />,
     errorElement: <ErrorPage />,
-  }
+  },
+  {
+    path: "/changelog",
+    element: <Changelog />,
+    errorElement: <ErrorPage />,
+  },
 ]);
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(

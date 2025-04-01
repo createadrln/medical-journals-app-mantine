@@ -1,4 +1,5 @@
-import { Text, Container } from "@mantine/core";
+import { Text, Container, Anchor } from "@mantine/core";
+import { Link } from "react-router-dom";
 import { EmailBanner } from "../EmailBanner/EmailBanner";
 import classes from "./FooterLinks.module.css";
 
@@ -6,7 +7,7 @@ const data = [
   {
     title: "About",
     links: [
-      { label: "Features", link: "#" },
+      { label: "Project Description", link: "/about" },
       { label: "Support", link: "#" },
       { label: "Discuss", link: "#" },
     ],
@@ -15,7 +16,7 @@ const data = [
     title: "Project",
     links: [
       { label: "Contribute", link: "#" },
-      { label: "Changelog", link: "#" },
+      { label: "Changelog", link: "/changelog" },
       { label: "Releases", link: "#" },
     ],
   },
@@ -23,16 +24,15 @@ const data = [
 
 const Footer = () => {
   const groups = data.map((group) => {
-    const links = group.links.map((link, index) => (
-      <Text<"a">
-        key={index}
+    const links = group.links.map((link) => (
+      <Anchor
+        key={link.label}
         className={classes.link}
-        component="a"
-        href={link.link}
-        onClick={(event) => event.preventDefault()}
+        component={Link}
+        to={link.link}
       >
         {link.label}
-      </Text>
+      </Anchor>
     ));
 
     return (
