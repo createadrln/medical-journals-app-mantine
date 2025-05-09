@@ -25,6 +25,12 @@ export default function Changelog() {
               <li>Added Changelog Page.</li>
               <li>Added Springer Data source.</li>
             </ul>
+            <h2>5/07/2025</h2>
+            <ul>
+              <li>Added 2025 and 2024 PubMed articles.</li>
+              <li>Added 2023 PubMed articles.</li>
+              <li>Enabled mailing list signup.</li>
+            </ul>
           </Paper>
         </main>
       </Container>
